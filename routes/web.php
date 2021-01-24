@@ -1,17 +1,8 @@
 <?php
 declare(strict_types=1);
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+use App\Http\Controllers\CustomerController;
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+/** @var Laravel\Lumen\Application $app */
+$app->router->get('/customers', CustomerController::class . '@index');
+$app->router->get('/customers/{customerId}', CustomerController::class . '@show');

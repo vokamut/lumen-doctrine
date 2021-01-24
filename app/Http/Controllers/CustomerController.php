@@ -3,17 +3,27 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-class ExampleController extends Controller
+use Illuminate\Http\JsonResponse;
+
+class CustomerController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @return JsonResponse
      */
-    public function __construct()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json([]);
     }
 
-    //
+    /**
+     * @param int $customerId
+     *
+     * @return JsonResponse
+     */
+    public function show(int $customerId): JsonResponse
+    {
+        return response()->json([
+            'id' => $customerId
+        ]);
+    }
 }
