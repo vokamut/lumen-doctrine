@@ -1,7 +1,9 @@
 {
     "name": "vokamut/lumen-doctrine",
     "description": "The Laravel Lumen Framework with Doctrine ORM.",
-    "keywords": ["test"],
+    "keywords": [
+        "test"
+    ],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -17,10 +19,6 @@
         "phpunit/phpunit": "^8.5"
     },
     "autoload": {
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "psr-4": {
             "App\\": "app/"
         }

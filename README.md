@@ -1,6 +1,7 @@
 # Lumen PHP Framework with Doctrine ORM
 
 ## Install
+
 ```
 composer install
 
