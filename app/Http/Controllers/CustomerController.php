@@ -23,7 +23,7 @@ class CustomerController extends Controller
     public function show(int $customerId): JsonResponse
     {
         return response()->json([
-            'id' => $customerId
+            'id' => $customerId,
         ]);
     }
 }
