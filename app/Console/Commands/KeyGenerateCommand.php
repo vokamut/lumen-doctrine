@@ -31,13 +31,18 @@ class KeyGenerateCommand extends Command
     {
         $path = base_path('.env');
 
-        if (file_exists($path)) {
-            file_put_contents(
-                $path,
-                str_replace('APP_KEY=' . env('APP_KEY'), 'APP_KEY=' . Str::random(32), file_get_contents($path))
-            );
+        if (file_exists($path) === false) {
+            $this->error($path . ' file not found.');
         }
 
-        $this->info("Application key set successfully.");
+        file_put_contents(
+            $path,
+            str_replace(
+                'APP_KEY=' . env('APP_KEY'), 'APP_KEY=' . Str::random(32),
+                file_get_contents($path)
+            )
+        );
+
+        $this->info('Application key set successfully.');
     }
 }
