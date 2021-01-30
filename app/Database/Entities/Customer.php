@@ -11,55 +11,67 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Customer
 {
+    public const GENDER_FEMALE = false;
+    public const GENDER_MALE = true;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected int $id;
+    private int $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
-    protected string $firstname;
+    private string $firstname;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
-    protected string $lastname;
+    private string $lastname;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64, unique=true)
      */
-    protected string $email;
+    private string $email;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
-    protected string $country;
+    private string $country;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
-    protected string $username;
+    private string $username;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="boolean")
      */
-    protected string $gender;
+    private bool $gender;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
-    protected string $city;
+    private string $city;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=32)
      */
-    protected string $phone;
+    private string $phone;
 
     /**
-     * @param $title
+     * Customer constructor.
+     *
+     * @param string $firstname
+     * @param string $lastname
+     * @param string $email
+     * @param string $country
+     * @param string $username
+     * @param bool $gender
+     * @param string $city
+     * @param string $phone
      */
     public function __construct(
         string $firstname,
@@ -67,7 +79,7 @@ class Customer
         string $email,
         string $country,
         string $username,
-        string $gender,
+        bool $gender,
         string $city,
         string $phone
     )
@@ -82,72 +94,77 @@ class Customer
         $this->phone = $phone;
     }
 
-    public function getId(): int
+    final public function getId(): int
     {
         return $this->id;
     }
 
-    public function getFullName(): string
+    final public function getFullName(): string
     {
-        return $this->firstname . ' ' . $this->lastname;
+        return $this->getFirstname() . ' ' . $this->getLastname();
     }
 
-    public function getFirstname(): string
+    final public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    public function getLastname(): string
+    final public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    public function getEmail(): string
+    final public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function getCountry(): string
+    final public function getCountry(): string
     {
         return $this->country;
     }
 
-    public function getUsername(): string
+    final public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function getGender(): string
+    final public function getGender(): bool
     {
         return $this->gender;
     }
 
-    public function getCity(): string
+    final public function getCity(): string
     {
         return $this->city;
     }
 
-    public function getPhone(): string
+    final public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray(): array
+    final public function toArray(): array
     {
         return [
             'id' => $this->getId(),
             'fullName' => $this->getFullName(),
-            'firstname' => $this->getFirstname(),
-            'lastname' => $this->getLastname(),
             'email' => $this->getEmail(),
             'country' => $this->getCountry(),
             'username' => $this->getUsername(),
             'gender' => $this->getGender(),
             'city' => $this->getCity(),
             'phone' => $this->getPhone(),
+        ];
+    }
+
+    final public function toArrayForList(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'fullName' => $this->getFullName(),
+            'email' => $this->getEmail(),
+            'country' => $this->getCountry(),
         ];
     }
 }
