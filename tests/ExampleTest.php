@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
