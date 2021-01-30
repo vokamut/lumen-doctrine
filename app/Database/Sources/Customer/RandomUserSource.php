@@ -5,49 +5,49 @@ namespace App\Database\Sources\Customer;
 
 class RandomUserSource implements CustomerSourceInterface
 {
-    protected array $data;
+    private array $data;
 
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    public function firstname(): string
+    final public function firstname(): string
     {
         return (string)$this->data['results']['name']['first'];
     }
 
-    public function lastname(): string
+    final public function lastname(): string
     {
         return (string)$this->data['results']['name']['last'];
     }
 
-    public function email(): string
+    final public function email(): string
     {
         return (string)$this->data['results']['email'];
     }
 
-    public function country(): string
+    final public function country(): string
     {
         return (string)$this->data['results']['location']['country'];
     }
 
-    public function city(): string
+    final public function city(): string
     {
         return (string)$this->data['results']['location']['city'];
     }
 
-    public function username(): string
+    final public function username(): string
     {
         return (string)$this->data['results']['login']['username'];
     }
 
-    public function gender(): string
+    final public function gender(): bool
     {
-        return (string)$this->data['results']['gender'];
+        return (bool)$this->data['results']['gender'];
     }
 
-    public function phone(): string
+    final public function phone(): string
     {
         return (string)$this->data['results']['phone'];
     }

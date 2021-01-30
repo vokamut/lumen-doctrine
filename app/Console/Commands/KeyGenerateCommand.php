@@ -27,7 +27,7 @@ class KeyGenerateCommand extends Command
      *
      * @return void
      */
-    public function handle(): void
+    final public function handle(): void
     {
         $path = base_path('.env');
 

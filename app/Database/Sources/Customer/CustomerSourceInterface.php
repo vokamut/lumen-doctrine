@@ -36,9 +36,9 @@ interface CustomerSourceInterface
     public function username(): string;
 
     /**
-     * @return string
+     * @return bool
      */
-    public function gender(): string;
+    public function gender(): bool;
 
     /**
      * @return string

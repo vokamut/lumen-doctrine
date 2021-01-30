@@ -11,23 +11,23 @@ class CustomerFactory
     /**
      * @var CustomerSourceInterface
      */
-    protected CustomerSourceInterface $source;
+    private CustomerSourceInterface $source;
 
     public function __construct(CustomerSourceInterface $source)
     {
         $this->source = $source;
     }
 
-    public function create(): Customer
+    final public function create(): Customer
     {
         return new Customer(
             $this->source->firstname(),
             $this->source->lastname(),
             $this->source->email(),
             $this->source->country(),
-            $this->source->city(),
             $this->source->username(),
             $this->source->gender(),
+            $this->source->city(),
             $this->source->phone(),
         );
     }

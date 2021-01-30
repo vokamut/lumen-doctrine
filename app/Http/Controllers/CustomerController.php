@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class CustomerController extends Controller
 {
-    private $customers;
+    private CustomerRepository $customers;
 
     public function __construct(CustomerRepository $customers)
     {
@@ -24,7 +24,7 @@ class CustomerController extends Controller
         /** @var Customer[] $customers */
         $customers = $this->customers->findAll();
 
-        return response()->json(array_map(function (Customer $customer) {
+        return response()->json(array_map(static function (Customer $customer) {
             return $customer->toArrayForList();
         }, $customers));
     }
