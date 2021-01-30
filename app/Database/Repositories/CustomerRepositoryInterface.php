@@ -13,4 +13,9 @@ interface CustomerRepositoryInterface
      * @return Customer|object|null
      */
     public function findOneByEmail(string $email): ?object;
+
+    /**
+     * @return array
+     */
+    public function findAllForList(): array;
 }

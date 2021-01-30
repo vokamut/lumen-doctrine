@@ -9,11 +9,11 @@ use Illuminate\Http\JsonResponse;
 
 class CustomerController extends Controller
 {
-    private CustomerRepository $customers;
+    private CustomerRepository $customerRepository;
 
-    public function __construct(CustomerRepository $customers)
+    public function __construct(CustomerRepository $customerRepository)
     {
-        $this->customers = $customers;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -21,12 +21,7 @@ class CustomerController extends Controller
      */
     final public function index(): JsonResponse
     {
-        /** @var Customer[] $customers */
-        $customers = $this->customers->findAll();
-
-        return response()->json(array_map(static function (Customer $customer) {
-            return $customer->toArrayForList();
-        }, $customers));
+        return response()->json($this->customerRepository->findAllForList());
     }
 
     /**
@@ -36,11 +31,14 @@ class CustomerController extends Controller
      */
     final public function show(int $customerId): JsonResponse
     {
-        /** @var Customer $customer */
-        $customer = $this->customers->find($customerId);
+        /** @var Customer|null $customer */
+        $customer = $this->customerRepository->find($customerId);
 
         if ($customer === null) {
-            abort(404);
+            return response()->json(
+                ['message' => sprintf('Customer[%s] not found', $customerId)],
+                404
+            );
         }
 
         return response()->json($customer->toArray());
