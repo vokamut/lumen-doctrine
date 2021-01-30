@@ -25,14 +25,16 @@ class KeyGenerateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
-    final public function handle(): void
+    final public function handle(): int
     {
         $path = base_path('.env');
 
         if (file_exists($path) === false) {
             $this->error($path . ' file not found.');
+
+            return 1;
         }
 
         file_put_contents(
@@ -44,5 +46,7 @@ class KeyGenerateCommand extends Command
         );
 
         $this->info('Application key set successfully.');
+
+        return 0;
     }
 }

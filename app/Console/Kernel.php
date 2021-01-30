@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Console\Commands\ImportCustomersFromRandomuserCommand;
 use App\Console\Commands\KeyGenerateCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         KeyGenerateCommand::class,
+        ImportCustomersFromRandomuserCommand::class,
     ];
 
     /**

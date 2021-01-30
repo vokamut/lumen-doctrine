@@ -109,9 +109,19 @@ class Customer
         return $this->firstname;
     }
 
+    final public function setFirstname(string $firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
     final public function getLastname(): string
     {
         return $this->lastname;
+    }
+
+    final public function setLastname(string $lastname): void
+    {
+        $this->lastname = $lastname;
     }
 
     final public function getEmail(): string
@@ -119,9 +129,19 @@ class Customer
         return $this->email;
     }
 
+    final public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
     final public function getCountry(): string
     {
         return $this->country;
+    }
+
+    final public function setCountry(string $country): void
+    {
+        $this->country = $country;
     }
 
     final public function getUsername(): string
@@ -129,9 +149,19 @@ class Customer
         return $this->username;
     }
 
+    final public function setUsername(string $username): void
+    {
+        $this->username = $username;
+    }
+
     final public function getGender(): bool
     {
         return $this->gender;
+    }
+
+    final public function setGender(bool $gender): void
+    {
+        $this->gender = $gender;
     }
 
     final public function getCity(): string
@@ -139,9 +169,19 @@ class Customer
         return $this->city;
     }
 
+    final public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
     final public function getPhone(): string
     {
         return $this->phone;
+    }
+
+    final public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
     }
 
     final public function toArray(): array
