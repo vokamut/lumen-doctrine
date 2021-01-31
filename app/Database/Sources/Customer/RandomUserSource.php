@@ -44,7 +44,7 @@ class RandomUserSource implements CustomerSourceInterface
 
     final public function gender(): bool
     {
-        return (bool)$this->data['gender'] === 'male';
+        return $this->data['gender'] === 'male';
     }
 
     final public function phone(): string

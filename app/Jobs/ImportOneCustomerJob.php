@@ -3,18 +3,10 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-class ExampleJob extends Job
-{
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+use App\Importers\RandomUserImporter;
 
+class ImportOneCustomerJob extends Job
+{
     /**
      * Execute the job.
      *
@@ -22,6 +14,6 @@ class ExampleJob extends Job
      */
     final public function handle(): void
     {
-        //
+        (new RandomUserImporter)->importUsers(1);
     }
 }

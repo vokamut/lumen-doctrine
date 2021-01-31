@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Database\Entities\Customer;
-use App\Database\Factories\CustomerFactory;
-use App\Database\Repositories\CustomerRepository;
-use App\Database\Sources\Customer\RandomUserSource;
-use GuzzleHttp\Client;
+use App\Importers\RandomUserImporter;
 use Illuminate\Console\Command;
 
 class ImportCustomersFromRandomuserCommand extends Command
 {
+    private const COUNT = 100;
+
     /**
      * The console command name.
      *
@@ -33,69 +31,15 @@ class ImportCustomersFromRandomuserCommand extends Command
      */
     final public function handle(): int
     {
-        $httpClient = new Client([
-            'base_uri' => 'https://randomuser.me/api/',
-            'http_errors' => false
-        ]);
+        $randomUsersResult = (new RandomUserImporter)->importUsers(self::COUNT);
 
-        $request = $httpClient->get('', [
-            'headers' => [
-                'accept' => 'application/json'
-            ],
-            'query' => [
-                'format' => 'json',
-                'nat' => 'au',
-                'results' => '100',
-                'inc' => 'gender,name,nat,location,email,login,phone'
-            ]
-        ]);
-
-        $statusCode = $request->getStatusCode();
-        $bodyContents = $request->getBody()->getContents();
-
-        if ($statusCode !== 200) {
-            $this->error(sprintf('randomuser.me returned[%s] status code', $statusCode));
-            $this->error($bodyContents);
+        if ($randomUsersResult === false) {
+            $this->error('Something went wrong. Show log file.');
 
             return 1;
         }
 
-        /** @var CustomerRepository $customerRepository */
-        $customerRepository = app(CustomerRepository::class);
-
-        $result = json_decode($bodyContents, true);
-
-        $bar = $this->output->createProgressBar(count($result['results']));
-
-        $createdCustomers = $updatedCustomers = 0;
-
-        foreach ($result['results'] as $user) {
-            /** @var Customer|null $customer */
-            $customer = $customerRepository->findOneByEmail($user['email']);
-
-            if ($customer === null) {
-                (new CustomerFactory(
-                    new RandomUserSource($user)
-                ))->create();
-
-                ++$createdCustomers;
-            } else {
-                (new CustomerFactory(
-                    new RandomUserSource($user)
-                ))->update($customer->getId());
-
-                ++$updatedCustomers;
-            }
-
-            $bar->advance();
-        }
-
-        $bar->finish();
-
-        $this->line('');
-
-        $this->info("{$createdCustomers} customers created");
-        $this->info("{$updatedCustomers} customers updated");
+        $this->info(self::COUNT . ' customers imported successfully');
 
         return 0;
     }
