@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
-use App\Importers\RandomUserImporter;
+use App\Database\Importers\CustomerImporter;
+use App\Database\Importers\Services\RandomUserService;
 
 class ImportOneCustomerJob extends Job
 {
@@ -14,6 +15,6 @@ class ImportOneCustomerJob extends Job
      */
     final public function handle(): void
     {
-        (new RandomUserImporter)->importUsers(1);
+        (new CustomerImporter(new RandomUserService()))->import(1);
     }
 }

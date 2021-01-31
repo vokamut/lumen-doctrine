@@ -6,7 +6,7 @@ use Laravel\Lumen\Routing\Router;
 
 /** @var Laravel\Lumen\Application $app */
 $app->router->group(['prefix' => 'customers'], static function (Router $router) {
-    $router->get('', CustomerController::class . '@index');
+    $router->get('', CustomerController::class . '@list');
     $router->get('{customerId}', CustomerController::class . '@show');
 });
 

@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Importers\RandomUserImporter;
+use App\Database\Importers\CustomerImporter;
+use App\Database\Importers\Services\RandomUserService;
 use Illuminate\Console\Command;
 
 class ImportCustomersFromRandomuserCommand extends Command
@@ -31,7 +32,7 @@ class ImportCustomersFromRandomuserCommand extends Command
      */
     final public function handle(): int
     {
-        $randomUsersResult = (new RandomUserImporter)->importUsers(self::COUNT);
+        $randomUsersResult = (new CustomerImporter(new RandomUserService()))->import(self::COUNT);
 
         if ($randomUsersResult === false) {
             $this->error('Something went wrong. Show log file.');

@@ -19,7 +19,7 @@ class CustomerController extends Controller
     /**
      * @return JsonResponse
      */
-    final public function index(): JsonResponse
+    final public function list(): JsonResponse
     {
         return response()->json($this->customerRepository->findAllForList());
     }

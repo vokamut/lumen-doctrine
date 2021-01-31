@@ -192,7 +192,7 @@ class Customer
             'email' => $this->getEmail(),
             'country' => $this->getCountry(),
             'username' => $this->getUsername(),
-            'gender' => $this->getGender(),
+            'gender' => $this->getGender() === self::GENDER_MALE ? 'male' : 'female',
             'city' => $this->getCity(),
             'phone' => $this->getPhone(),
         ];
