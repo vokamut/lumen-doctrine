@@ -1,3 +1,8 @@
+<p align="center">
+<a href="https://github.styleci.io/repos/332420872"><img src="https://github.styleci.io/repos/332420872/shield?branch=master" alt="StyleCI"></a>
+<a href="https://travis-ci.org/vokamut/lumen-doctrine"><img src="https://travis-ci.org/vokamut/lumen-doctrine.svg?branch=master" alt="Build Status"></a>
+</p>
+
 # Lumen PHP Framework with Doctrine ORM
 
 ## Install
