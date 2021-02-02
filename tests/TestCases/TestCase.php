@@ -14,14 +14,14 @@ use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /**
-     * @var EntityManagerInterface
+     * @var EntityManagerInterface|null
      */
-    protected $entityManager;
+    protected ?EntityManagerInterface $entityManager = null;
 
     /**
-     * @var CustomerRepository
+     * @var CustomerRepository|null
      */
-    protected $customerRepository;
+    protected ?CustomerRepository $customerRepository = null;
 
     /**
      * Creates the application.

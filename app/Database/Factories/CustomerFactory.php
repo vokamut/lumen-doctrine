@@ -19,7 +19,7 @@ class CustomerFactory
     /**
      * @var CustomerRepository
      */
-    private $customerRepository;
+    private CustomerRepository $customerRepository;
 
     public function __construct(CustomerSourceInterface $source)
     {
