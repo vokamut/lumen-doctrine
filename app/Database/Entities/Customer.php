@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Database\Entities;
@@ -82,8 +83,7 @@ class Customer
         bool $gender,
         string $city,
         string $phone
-    )
-    {
+    ) {
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;

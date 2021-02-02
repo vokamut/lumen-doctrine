@@ -1,6 +1,9 @@
-php:
-  preset: laravel
-  disabled:
-    - unused_use
-js: true
-css: true
+preset: laravel
+disabled:
+  - unused_use
+  - concat_without_spaces
+  - post_increment
+finder:
+  not-name:
+    - index.php
+    - server.php

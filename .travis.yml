@@ -1,0 +1,15 @@
+dist: bionic
+language: php
+php:
+  - 7.4
+cache:
+  directories:
+    - $HOME/.composer/cache
+before_script:
+  - cp .env.travis .env
+  - composer self-update
+  - composer install --prefer-source --no-interaction
+  - php artisan key:generate
+  - php artisan doctrine:schema:create
+script:
+  - vendor/bin/phpunit --configuration phpunit.xml

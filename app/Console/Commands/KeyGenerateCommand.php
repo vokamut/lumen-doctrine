@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
@@ -20,7 +21,7 @@ class KeyGenerateCommand extends Command
      *
      * @var string
      */
-    protected $description = "Set the application key";
+    protected $description = 'Set the application key';
 
     /**
      * Execute the console command.

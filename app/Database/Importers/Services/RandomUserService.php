@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Database\Importers\Services;
@@ -19,7 +20,7 @@ class RandomUserService implements CustomerServiceImporterInterface
     {
         $this->httpClient = new Client([
             'base_uri' => 'https://randomuser.me/api/',
-            'http_errors' => false
+            'http_errors' => false,
         ]);
     }
 
@@ -28,7 +29,7 @@ class RandomUserService implements CustomerServiceImporterInterface
         /** @noinspection PhpUnhandledExceptionInspection */
         $request = $this->httpClient->get('', [
             'headers' => [
-                'accept' => 'application/json'
+                'accept' => 'application/json',
             ],
             'query' => [
                 'format' => 'json',
@@ -36,7 +37,7 @@ class RandomUserService implements CustomerServiceImporterInterface
                 'results' => $count,
                 'inc' => 'gender,name,nat,location,email,login,phone',
                 'noinfo' => '',
-            ]
+            ],
         ]);
 
         $statusCode = $request->getStatusCode();

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Providers;
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     final public function register(): void
     {
-        $this->app->bind(CustomerRepository::class, function($app) {
+        $this->app->bind(CustomerRepository::class, function ($app) {
             return new CustomerRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(Customer::class)

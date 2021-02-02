@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Database\Sources\Customer;
@@ -44,5 +45,4 @@ interface CustomerSourceInterface
      * @return string
      */
     public function phone(): string;
-
 }

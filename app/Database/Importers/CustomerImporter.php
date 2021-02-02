@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Database\Importers;
 
 use App\Database\Entities\Customer;
 use App\Database\Factories\CustomerFactory;
-use App\Database\Repositories\CustomerRepository;
 use App\Database\Importers\Services\CustomerServiceImporterInterface;
+use App\Database\Repositories\CustomerRepository;
 use RuntimeException;
 
 class CustomerImporter

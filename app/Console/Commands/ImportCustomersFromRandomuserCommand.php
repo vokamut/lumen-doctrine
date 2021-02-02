@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
@@ -23,7 +24,7 @@ class ImportCustomersFromRandomuserCommand extends Command
      *
      * @var string
      */
-    protected $description = "Import customers from randomuser.me service.";
+    protected $description = 'Import customers from randomuser.me service.';
 
     /**
      * Execute the console command.
