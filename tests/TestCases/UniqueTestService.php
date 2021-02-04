@@ -5,7 +5,7 @@ namespace Tests\TestCases;
 use App\Database\Importers\Services\CustomerServiceImporterInterface;
 use App\Database\Sources\Customer\CustomerSourceInterface;
 
-class TestService implements CustomerServiceImporterInterface
+class UniqueTestService implements CustomerServiceImporterInterface
 {
     final public function getUsers(int $count): array
     {
@@ -15,7 +15,7 @@ class TestService implements CustomerServiceImporterInterface
             $users[] = [
                 'firstname' => $i . 'Firstname',
                 'lastname' => $i . 'Lastname',
-                'email' => "email{$i}@example.com",
+                'email' => 'uniqueemail' . $i . '@example.com',
                 'country' => $i . 'Country',
                 'city' => $i . 'City',
                 'username' => $i . 'Username',

@@ -55,6 +55,15 @@ class CustomerFactory
             return null;
         }
 
+        $customer->setFirstname($this->source->firstname());
+        $customer->setLastname($this->source->lastname());
+        $customer->setEmail($this->source->email());
+        $customer->setCountry($this->source->country());
+        $customer->setUsername($this->source->username());
+        $customer->setGender($this->source->gender());
+        $customer->setCity($this->source->city());
+        $customer->setPhone($this->source->phone());
+
         EntityManager::persist($customer);
         EntityManager::flush();
 
