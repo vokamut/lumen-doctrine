@@ -1,6 +1,8 @@
 <p align="center">
 <a href="https://github.styleci.io/repos/332420872"><img src="https://github.styleci.io/repos/332420872/shield?branch=master" alt="StyleCI"></a>
 <a href="https://travis-ci.org/vokamut/lumen-doctrine"><img src="https://travis-ci.org/vokamut/lumen-doctrine.svg?branch=master" alt="Build Status"></a>
+<a href="https://phpstan.org/"><img src="https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat" alt="PHPStan Enabled"></a>
+<a href="https://psalm.dev/"><img src="https://img.shields.io/badge/Psalm-enabled-brightgreen.svg?style=flat" alt="Psalm Enabled"></a>
 </p>
 
 # Lumen PHP Framework with Doctrine ORM
