@@ -11,12 +11,14 @@ interface CustomerRepositoryInterface
     /**
      * @param string $email
      *
-     * @return Customer|object|null
+     * @return Customer|null
      */
     public function findOneByEmail(string $email): ?object;
 
     /**
-     * @return array
+     * @return Customer[]
+     *
+     * @psalm-return list<array>
      */
     public function findAllForList(): array;
 }

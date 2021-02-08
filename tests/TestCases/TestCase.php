@@ -14,35 +14,23 @@ use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 abstract class TestCase extends BaseTestCase
 {
     /**
-     * @var EntityManagerInterface|null
+     * @var EntityManagerInterface
      */
-    protected ?EntityManagerInterface $entityManager = null;
+    protected $entityManager;
 
     /**
-     * @var CustomerRepository|null
+     * @var CustomerRepository
      */
-    protected ?CustomerRepository $customerRepository = null;
+    protected $customerRepository;
 
     /**
      * Creates the application.
      *
-     * @return \Laravel\Lumen\Application
+     * @return Application
      */
     final public function createApplication(): Application
     {
         return require __DIR__ . '/../../bootstrap/app.php';
-    }
-
-    /**
-     * Get Http request filled with given data.
-     *
-     * @param array|null $data
-     *
-     * @return \Illuminate\Http\Request
-     */
-    final protected function getRequest(?array $data = null): Request
-    {
-        return new Request($data ?? []);
     }
 
     /**

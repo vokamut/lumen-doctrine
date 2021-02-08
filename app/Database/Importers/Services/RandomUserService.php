@@ -50,9 +50,10 @@ class RandomUserService implements CustomerServiceImporterInterface
             return [];
         }
 
+        /** @var array $result */
         $result = json_decode($bodyContents, true, 512, JSON_THROW_ON_ERROR);
 
-        return $result['results'];
+        return (array) $result['results'];
     }
 
     final public function getSource(array $user): CustomerSourceInterface

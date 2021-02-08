@@ -6,7 +6,9 @@ namespace App\Providers;
 
 use App\Database\Entities\Customer;
 use App\Database\Repositories\CustomerRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Application;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,10 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     final public function register(): void
     {
-        $this->app->bind(CustomerRepository::class, function ($app) {
+        $this->app->bind(CustomerRepository::class, function (Application $app) {
+            /** @var EntityManagerInterface $entityManager */
+            $entityManager = $app['em'];
+
             return new CustomerRepository(
-                $app['em'],
-                $app['em']->getClassMetaData(Customer::class)
+                $entityManager,
+                $entityManager->getClassMetaData(Customer::class)
             );
         });
     }

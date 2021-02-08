@@ -28,17 +28,19 @@ class CustomerImporter
             throw new RuntimeException('Count must be greater than 0');
         }
 
+        /** @var array[] $users */
         $users = $this->serviceImporter->getUsers($count);
 
         if (count($users) === 0) {
             return false;
         }
 
+        /** @var CustomerRepository $customerRepository */
         $customerRepository = app(CustomerRepository::class);
 
         foreach ($users as $user) {
             /** @var Customer|null $customer */
-            $customer = $customerRepository->findOneByEmail($user['email']);
+            $customer = $customerRepository->findOneByEmail((string) $user['email']);
 
             if ($customer === null) {
                 (new CustomerFactory(

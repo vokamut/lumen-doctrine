@@ -6,6 +6,7 @@ namespace Tests\Unit\App\Database\Importers;
 
 use App\Database\Entities\Customer;
 use App\Database\Importers\CustomerImporter;
+use App\Database\Repositories\CustomerRepository;
 use App\Http\Controllers\CustomerController;
 use Tests\TestCases\NoUniqueTestService;
 use Tests\TestCases\TestCase;
@@ -18,18 +19,21 @@ class CustomerImporterTest extends TestCase
         $countUsers = 10;
 
         $testService = new UniqueTestService;
+
+        /** @var array[] $users */
         $users = $testService->getUsers($countUsers);
 
         $customerImporter = new CustomerImporter(new UniqueTestService);
 
         self::assertTrue($customerImporter->import($countUsers));
 
+        /** @var CustomerRepository $repository */
         $repository = $this->entityManager->getRepository(Customer::class);
         $customerController = new CustomerController($this->customerRepository);
 
         foreach ($users as $user) {
             /** @var Customer $customer */
-            $customer = $repository->findOneByEmail($user['email']);
+            $customer = $repository->findOneByEmail((string) $user['email']);
 
             self::assertEquals($user['firstname'], $customer->getFirstname());
             self::assertEquals($user['lastname'], $customer->getLastname());
@@ -44,10 +48,11 @@ class CustomerImporterTest extends TestCase
 
             self::assertEquals(200, $response->getStatusCode());
 
+            /** @var array $responseUser */
             $responseUser = $response->getData(true);
 
             self::assertEquals($customer->getId(), $responseUser['id']);
-            self::assertEquals($user['firstname'] . ' ' . $user['lastname'], $responseUser['fullName']);
+            self::assertEquals(((string) $user['firstname']) . ' ' . ((string) $user['lastname']), $responseUser['fullName']);
             self::assertEquals($user['email'], $responseUser['email']);
             self::assertEquals($user['country'], $responseUser['country']);
             self::assertEquals($user['city'], $responseUser['city']);
@@ -57,6 +62,8 @@ class CustomerImporterTest extends TestCase
         }
 
         $responseList = $customerController->list();
+
+        /** @var array[] $responseListUsers */
         $responseListUsers = $responseList->getData(true);
 
         self::assertEquals(200, $responseList->getStatusCode());
@@ -84,6 +91,8 @@ class CustomerImporterTest extends TestCase
         $countUsers = 10;
 
         $testService = new NoUniqueTestService;
+
+        /** @var array[] $users */
         $users = $testService->getUsers($countUsers);
 
         $users = array_reverse($users);
@@ -92,16 +101,19 @@ class CustomerImporterTest extends TestCase
 
         self::assertTrue($customerImporter->import($countUsers));
 
+        /** @var CustomerRepository $repository */
         $repository = $this->entityManager->getRepository(Customer::class);
         $customerController = new CustomerController($this->customerRepository);
 
         $assertsUserEmails = [];
 
         foreach ($users as $index => $user) {
-            /** @var Customer $customer */
-            $customer = $repository->findOneByEmail($user['email']);
+            $email = (string) $user['email'];
 
-            if (array_key_exists($user['email'], $assertsUserEmails)) {
+            /** @var Customer $customer */
+            $customer = $repository->findOneByEmail($email);
+
+            if (array_key_exists($email, $assertsUserEmails)) {
                 self::assertNotEquals($user['firstname'], $customer->getFirstname());
                 self::assertNotEquals($user['lastname'], $customer->getLastname());
                 self::assertEquals($user['email'], $customer->getEmail());
@@ -115,10 +127,11 @@ class CustomerImporterTest extends TestCase
 
                 self::assertEquals(200, $response->getStatusCode());
 
+                /** @var array $responseUser */
                 $responseUser = $response->getData(true);
 
                 self::assertEquals($customer->getId(), $responseUser['id']);
-                self::assertNotEquals($user['firstname'] . ' ' . $user['lastname'], $responseUser['fullName']);
+                self::assertNotEquals(((string) $user['firstname']) . ' ' . ((string) $user['lastname']), $responseUser['fullName']);
                 self::assertEquals($user['email'], $responseUser['email']);
                 self::assertNotEquals($user['country'], $responseUser['country']);
                 self::assertNotEquals($user['city'], $responseUser['city']);
@@ -139,10 +152,11 @@ class CustomerImporterTest extends TestCase
 
                 self::assertEquals(200, $response->getStatusCode());
 
+                /** @var array $responseUser */
                 $responseUser = $response->getData(true);
 
                 self::assertEquals($customer->getId(), $responseUser['id']);
-                self::assertEquals($user['firstname'] . ' ' . $user['lastname'], $responseUser['fullName']);
+                self::assertEquals(((string) $user['firstname']) . ' ' . ((string) $user['lastname']), $responseUser['fullName']);
                 self::assertEquals($user['email'], $responseUser['email']);
                 self::assertEquals($user['country'], $responseUser['country']);
                 self::assertEquals($user['city'], $responseUser['city']);
@@ -150,11 +164,13 @@ class CustomerImporterTest extends TestCase
                 self::assertEquals($user['gender'] === Customer::GENDER_MALE ? 'male' : 'female', $responseUser['gender']);
                 self::assertEquals($user['phone'], $responseUser['phone']);
 
-                $assertsUserEmails[$user['email']] = true;
+                $assertsUserEmails[$email] = true;
             }
         }
 
         $responseList = $customerController->list();
+
+        /** @var array[] $responseListUsers */
         $responseListUsers = $responseList->getData(true);
 
         self::assertEquals(200, $responseList->getStatusCode());

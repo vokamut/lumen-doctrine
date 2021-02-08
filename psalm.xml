@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="." />
+        <ignoreFiles>
+            <directory name="database" />
+            <directory name="storage" />
+            <directory name="vendor" />
+        </ignoreFiles>
+
+    </projectFiles>
+    <issueHandlers>
+        <MixedArrayAccess>
+            <errorLevel type="suppress">
+                <file name="app/Database/Sources/Customer/RandomUserSource.php" />
+            </errorLevel>
+        </MixedArrayAccess>
+        <MixedReturnStatement>
+            <errorLevel type="suppress">
+                <file name="app/Database/Repositories/CustomerRepository.php" />
+                <file name="app/Http/Controllers/CustomerController.php" />
+            </errorLevel>
+        </MixedReturnStatement>
+        <MixedInferredReturnType>
+            <errorLevel type="suppress">
+                <file name="app/Database/Repositories/CustomerRepository.php" />
+                <file name="app/Http/Controllers/CustomerController.php" />
+            </errorLevel>
+        </MixedInferredReturnType>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <file name="app/Console/Commands/ImportCustomersFromRandomuserCommand.php" />
+                <file name="app/Console/Commands/KeyGenerateCommand.php" />
+                <file name="app/Console/Kernel.php" />
+                <file name="app/Database/Entities/Customer.php" />
+                <file name="tests/Unit/App/Database/Importers/CustomerImporterTest.php" />
+                <file name="tests/Unit/App/Http/Controllers/CustomerControllerTest.php" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <InvalidDocblock>
+            <errorLevel type="suppress">
+                <file name="vendor/doctrine/orm/lib/Doctrine/ORM/EntityRepository.php" />
+            </errorLevel>
+        </InvalidDocblock>
+        <ImplementedReturnTypeMismatch>
+            <errorLevel type="suppress">
+                <file name="tests/TestCases/TestCase.php" />
+            </errorLevel>
+        </ImplementedReturnTypeMismatch>
+        <MixedMethodCall>
+            <errorLevel type="suppress">
+                <file name="tests/TestCases/TestCase.php" />
+            </errorLevel>
+        </MixedMethodCall>
+        <MixedAssignment>
+            <errorLevel type="suppress">
+                <file name="tests/TestCases/TestCase.php" />
+            </errorLevel>
+        </MixedAssignment>
+    </issueHandlers>
+</psalm>

@@ -16,15 +16,8 @@ class CustomerFactory
      */
     private CustomerSourceInterface $source;
 
-    /**
-     * @var CustomerRepository
-     */
-    private CustomerRepository $customerRepository;
-
     public function __construct(CustomerSourceInterface $source)
     {
-        /** @var CustomerRepository $customerRepository */
-        $this->customerRepository = app(CustomerRepository::class);
         $this->source = $source;
     }
 
@@ -49,7 +42,10 @@ class CustomerFactory
 
     final public function update(int $id): ?Customer
     {
-        $customer = $this->customerRepository->find($id);
+        /** @var CustomerRepository $customerRepository */
+        $customerRepository = app(CustomerRepository::class);
+
+        $customer = $customerRepository->find($id);
 
         if (($customer instanceof Customer) === false) {
             return null;
