@@ -42,7 +42,7 @@ class KeyGenerateCommand extends Command
             $path,
             str_replace(
                 'APP_KEY=' . ((string) env('APP_KEY')), 'APP_KEY=' . Str::random(32),
-                file_get_contents($path)
+                (string) file_get_contents($path)
             )
         );
 

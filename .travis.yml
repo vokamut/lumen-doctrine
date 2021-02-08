@@ -13,3 +13,5 @@ before_script:
   - php artisan doctrine:schema:create
 script:
   - vendor/bin/phpunit --configuration phpunit.xml
+  - vendor/bin/psalm --config=psalm.xml
+  - vendor/bin/phpstan analyse --configuration=phpstan.neon

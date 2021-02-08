@@ -1,0 +1,13 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+        - '#Call to an undefined method Illuminate\\Http\\Response|Laravel\\Lumen\\Http\\ResponseFactory::json\(\)#'
+    level: 8
+    paths:
+        - app
+        - bootstrap
+        - config
+        - public
+        - routes
+        - tests
