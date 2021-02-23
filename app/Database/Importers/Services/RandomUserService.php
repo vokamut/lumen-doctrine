@@ -8,6 +8,7 @@ use App\Database\Sources\Customer\CustomerSourceInterface;
 use App\Database\Sources\Customer\RandomUserSource;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+use JsonException;
 
 class RandomUserService implements CustomerServiceImporterInterface
 {
@@ -51,7 +52,13 @@ class RandomUserService implements CustomerServiceImporterInterface
         }
 
         /** @var array $result */
-        $result = json_decode($bodyContents, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            $result = json_decode($bodyContents, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            report($e);
+
+            return [];
+        }
 
         return (array) $result['results'];
     }

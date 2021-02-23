@@ -7,7 +7,6 @@ namespace Tests\TestCases;
 use App\Database\Repositories\CustomerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Http\Request;
 use Laravel\Lumen\Application;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 

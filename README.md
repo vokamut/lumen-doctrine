@@ -39,6 +39,13 @@ curl http://localhost:8000/customers/1
 php artisan import:customers:from:randomuser
 ```
 
+## Static analyzers
+
+```bash
+./vendor/bin/psalm
+./vendor/bin/phpstan
+```
+
 ## Tests
 
 ```bash

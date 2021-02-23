@@ -19,7 +19,7 @@ class KeyGenerateCommand extends Command
     /**
      * The console command description.
      *
-     * @var string
+     * @var null|string
      */
     protected $description = 'Set the application key';
 

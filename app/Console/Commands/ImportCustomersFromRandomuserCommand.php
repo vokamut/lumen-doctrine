@@ -22,7 +22,7 @@ class ImportCustomersFromRandomuserCommand extends Command
     /**
      * The console command description.
      *
-     * @var string
+     * @var null|string
      */
     protected $description = 'Import customers from randomuser.me service.';
 
