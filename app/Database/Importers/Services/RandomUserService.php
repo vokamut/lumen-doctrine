@@ -51,8 +51,8 @@ class RandomUserService implements CustomerServiceImporterInterface
             return [];
         }
 
-        /** @var array $result */
         try {
+            /** @var array $result */
             $result = json_decode($bodyContents, true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
             report($e);
